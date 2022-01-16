@@ -4,6 +4,6 @@ const unsigned int SCR_HEIGHT = 600;
 #include "camera.hpp"
 
 int main () {
-	Camera* = new Camera();
+	Camera* cam = new Camera();
 	return 0;
 }
