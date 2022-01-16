@@ -11,6 +11,8 @@ class Camera {
 		yaw, pitch,
 		last_x, last_y,
 		FOV;
+	public:
+		Camera();
 
 };
 #endif
