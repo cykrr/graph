@@ -1,5 +1,7 @@
 INCLUDE=-Iinclude
-OBJS=glad.o camera.o window_manager.o shaders.o program.o
+OBJS=glad.o camera.o window_manager.o \
+	 shaders.o program.o color.o \
+	 plane.o element.o
 LINKS=-lm -ldl -lGL -lglfw 
 new: src/main.cpp $(OBJS) 
 	g++ src/main.cpp $(LINKS) $(INCLUDE) $(OBJS) -o new
@@ -13,5 +15,12 @@ shaders.o: src/shaders.cpp
 	g++ -c src/shaders.cpp $(INCLUDE)
 program.o: src/program.cpp
 	g++ -c src/program.cpp $(INCLUDE)
+color.o: src/color.cpp
+	g++ -c src/color.cpp $(INCLUDE)
+plane.o: src/plane.cpp
+	g++ -c src/plane.cpp $(INCLUDE)
+element.o: src/element.cpp
+	g++ -c src/element.cpp $(INCLUDE)
+
 clean:
 	rm *.o new
