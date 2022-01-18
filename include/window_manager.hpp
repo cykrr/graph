@@ -6,6 +6,8 @@
 #include "camera.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/glm.hpp"
+
+#include "color.hpp"
 class WindowManager{
 		float delta_time, last_frame;
 	public:
@@ -22,6 +24,11 @@ class WindowManager{
 		
 		GLFWwindow*  window;
 		Camera* cam;
+
+		void set_bg_color(Color color);
+		void clear();
+
 	private:
+		Color bg_color;
 };
 #endif

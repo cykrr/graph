@@ -1,4 +1,5 @@
 #include "window_manager.hpp"
+
 WindowManager::WindowManager(){
 	this->delta_time = 0.0f;
 	this->last_frame = 0.0f;
@@ -23,6 +24,7 @@ void WindowManager::init_gl(){
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, 1);
 
 	/* couldn't care less about supporting apple */
 #ifdef __APPLE__
@@ -61,6 +63,8 @@ void WindowManager::init_gl(){
 	glfwSetCursorPosCallback(this->window, mouse_func);
 	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 }
 
@@ -84,6 +88,10 @@ void WindowManager::process_input()
         this->cam->position -= glm::normalize(glm::cross(cam->front, cam->up)) * cam->speed;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         this->cam->position += glm::normalize(glm::cross(cam->front, cam->up)) * cam->speed;
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        this->cam->position += cam->up * cam->speed;
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        this->cam->position -= cam->up * cam->speed;
 }
 
 float WindowManager::get_width(){
@@ -97,4 +105,13 @@ float WindowManager::get_height(){
 	glfwGetWindowSize( this->window, &width, &height);
 	return height;
 
+}
+
+void WindowManager::set_bg_color(Color color){
+	this->bg_color = color;
+}
+
+void WindowManager::clear(){
+	glClearColor(0.03f, 0.03f, 0.03f, 0.8f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 }
