@@ -8,12 +8,12 @@ Shader::Shader(std::string name, unsigned int shader_type){
 	/* catch exception */
 	input.exceptions(std::ifstream::badbit|std::ifstream::failbit);
 	try {
-	input.open("./shaders/" + name + ".glsl");
+	input.open("./shaders/" + name);
 	buffer << input.rdbuf();
 	input.close();
 	source_string = buffer.str();
 	} catch (std::ifstream::failure error){
-		std::cout << name + ".glsl not found" << std::endl;
+		std::cout << name + "not found" << std::endl;
 		exit(3);
 	}
 
