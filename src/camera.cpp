@@ -2,12 +2,12 @@
 
 Camera::Camera(){
 
-	this->position = glm::vec3(0.0f, 0.0f, -3.0f);
+	this->position = glm::vec3(0.0f, 1.0f, -3.0f);
 	this->front = glm::vec3(0.0f, 0.0f, -1.0f);
 	this->up = glm::vec3(0.0f, 1.0f, 0.0f);
 
-	this->yaw = -90.0f;
-	this->pitch = 0.0f;
+	this->yaw = 90.0f;
+	this->pitch = -5.0f;
 
 	this->last_x = 800/2;
 	this->last_y = 600/2;
