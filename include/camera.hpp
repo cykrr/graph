@@ -21,6 +21,8 @@ class Camera {
 	public:
 		bool first_mouse_cam;
 		void update(double, double);
+	private:
+		void set_front();
 
 };
 #endif

@@ -9,6 +9,8 @@ Camera::Camera(){
 	this->yaw = 90.0f;
 	this->pitch = -5.0f;
 
+	this->set_front();
+
 	this->last_x = 800/2;
 	this->last_y = 600/2;
 
@@ -43,10 +45,12 @@ void Camera::update(double pos_x, double pos_y){
     if (pitch < -89.0f)
         pitch = -89.0f;
 
-	glm::vec3 front;
-    front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-    front.y = sin(glm::radians(pitch));
-    front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    this->front = glm::normalize(front);
+	set_front();
 }
 
+void Camera::set_front(){
+    this->front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    this->front.y = sin(glm::radians(pitch));
+    this->front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    this->front = glm::normalize(front);
+}
