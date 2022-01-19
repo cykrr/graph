@@ -21,6 +21,9 @@ plane.o: src/plane.cpp
 	g++ -c src/plane.cpp $(INCLUDE)
 element.o: src/element.cpp
 	g++ -c src/element.cpp $(INCLUDE)
+windows: $(OBJS)
+	 g++ src/main.cpp $(OBJS) $(INCLUDE) -Llinks -lglfw3dll -o new -g
 
 clean:
 	rm *.o new
+
