@@ -1,28 +1,31 @@
+CXX:=g++
 INCLUDE=-Iinclude
 OBJS=glad.o camera.o window_manager.o \
 	 shaders.o program.o color.o \
 	 plane.o element.o
 LINKS=-lm -ldl -lGL -lglfw 
 new: src/main.cpp $(OBJS) 
-	g++ src/main.cpp $(LINKS) $(INCLUDE) $(OBJS) -o new
+	$(CXX) src/main.cpp $(LINKS) $(INCLUDE) $(OBJS) -o new
 glad.o: src/glad.c
-	g++ -c src/glad.c $(INCLUDE)
-camera.o: src/camera.cpp
-	g++ -c src/camera.cpp $(INCLUDE)
+	$(CXX) -c src/glad.c $(INCLUDE)
+camera.o: src/camera.cpp 
+	$(CXX) -c src/camera.cpp $(INCLUDE) 
 window_manager.o: src/window_manager.cpp
-	g++ -c src/window_manager.cpp $(INCLUDE)
+	$(CXX) -c src/window_manager.cpp $(INCLUDE)
 shaders.o: src/shaders.cpp
-	g++ -c src/shaders.cpp $(INCLUDE)
+	$(CXX) -c src/shaders.cpp $(INCLUDE)
 program.o: src/program.cpp
-	g++ -c src/program.cpp $(INCLUDE)
+	$(CXX) -c src/program.cpp $(INCLUDE)
 color.o: src/color.cpp
-	g++ -c src/color.cpp $(INCLUDE)
+	$(CXX) -c src/color.cpp $(INCLUDE)
 plane.o: src/plane.cpp
-	g++ -c src/plane.cpp $(INCLUDE)
+	$(CXX) -c src/plane.cpp $(INCLUDE)
 element.o: src/element.cpp
-	g++ -c src/element.cpp $(INCLUDE)
+	$(CXX) -c src/element.cpp $(INCLUDE)
 windows: $(OBJS)
-	 g++ src/main.cpp $(OBJS) $(INCLUDE) -Llinks -lglfw3dll -o new -g
+	 $(CXX) src/main.cpp $(OBJS) $(INCLUDE)  -o new -g -Lmingw_links \
+		 -lglfw3 -lopengl32 -lgdi32 \
+		 -static -static-libstdc++ -static-libgcc 	
 
 clean:
 	rm *.o new
