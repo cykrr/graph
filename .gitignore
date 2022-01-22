@@ -3,3 +3,4 @@ a.out
 *.o
 .ccls-cache/
 compile_commands.json
+new.exe
