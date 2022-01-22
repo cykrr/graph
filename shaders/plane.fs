@@ -75,7 +75,8 @@ void main()
 
 	frag_color = ( grid(frag_pos_3d, 1) + grid(frag_pos_3d, 10) ) *float(t>0);
 
-	frag_color.a *= pow((pow((vec4(frag_pos_3d, 1.0)).x, 2) + pow((vec4(frag_pos_3d, 1.0)).z, 2) ) / 10, -1);
+	frag_color.a *= pow(
+			(pow((vec4(frag_pos_3d, 1.0)).x, 2) + pow((vec4(frag_pos_3d, 1.0)).z, 2) ) / 5, -1);
 
 
 }
