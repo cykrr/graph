@@ -67,7 +67,7 @@ void main()
 
 	vec3 frag_pos_3d = near_point + t * (far_point - near_point);
 
-	gl_FragDepth = depth(frag_pos_3d);
+//	gl_FragDepth = depth(frag_pos_3d);
 
 	float linear_depth = get_linear_depth(frag_pos_3d);
 
