@@ -76,7 +76,7 @@ void WindowManager::update_dt(){
 
 void WindowManager::process_input()
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
     this->cam->speed = 2.5f * this->delta_time;
