@@ -1,6 +1,6 @@
 #version 330 core
-float far = 100;
-float near = 0.1;
+float far = 100.0f;
+float near = 0.01f;
 
 in vec3 near_point;
 in vec3 far_point;
@@ -67,17 +67,13 @@ void main()
 
 	vec3 frag_pos_3d = near_point + t * (far_point - near_point);
 
-//	gl_FragDepth = depth(frag_pos_3d);
+	gl_FragDepth = depth(frag_pos_3d);
 
 	float linear_depth = get_linear_depth(frag_pos_3d);
 
 	float fading = max(0, (0.5f - linear_depth));
 
 	frag_color = ( grid(frag_pos_3d, 1) + grid(frag_pos_3d, 10) ) *float(t>0);
-
-	frag_color.a *= pow(
-			(pow((vec4(frag_pos_3d, 1.0)).x, 2) + pow((vec4(frag_pos_3d, 1.0)).z, 2) ) / 5, -1);
-
 
 }
 /*vim: set ft=glsl*/

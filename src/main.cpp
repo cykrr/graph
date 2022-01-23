@@ -1,6 +1,9 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+const float near_plane = 0.01f;
+const float far_plane = 100.0f;
+
 #include "camera.hpp"
 #include "window_manager.hpp"
 #include "shaders.hpp"
@@ -13,7 +16,8 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main () {
 	WindowManager* wm = new WindowManager();
-	Program* program = new Program("plane.vs", "plane.fs");
+	Program* plane_program = new Program("plane.vs", "plane.fs");
+	Program* common_program = new Program("common.vs", "common.fs");
 
 	//	Plane* plane = new Plane();
 
@@ -74,12 +78,12 @@ int main () {
 
 	};
 
-	glBindVertexArray(program->VAO);
+	glBindVertexArray(plane_program->VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, program->VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, plane_program->VBO);
 
 
-	glBufferData(GL_ARRAY_BUFFER, 30*sizeof(float) , nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertices) , nullptr, GL_DYNAMIC_DRAW);
 
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof (float), (void*)0);
@@ -92,7 +96,7 @@ int main () {
 		wm->clear();
 
 		glm::mat4 projection = glm::perspective(glm::radians(wm->cam->FOV), 
-				wm->get_width() / wm->get_height(), 0.1f, 100.0f);
+				wm->get_width() / wm->get_height(), near_plane, far_plane);
 
 		glm::mat4 view = glm::lookAt(wm->cam->position, wm->cam->position + wm->cam->front, 
 				wm->cam->up);
@@ -101,14 +105,21 @@ int main () {
 
 		glm::mat4 MVP =  projection * view *  model;
 
-		element->set_mat4("MVP", MVP);
-		program->set_mat4("MVP", MVP);
 
-		element->draw();
-		program->use();
+
+
+		common_program->bare_use();
+		common_program->set_mat4("MVP", MVP);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(cube_vertices), 
+				cube_vertices);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		plane_program->bare_use();
+		plane_program->set_mat4("MVP", MVP);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+
 
 
 
