@@ -12,15 +12,17 @@ uniform  vec4 my_color;
 uniform vec3 light_color;
 uniform vec3 object_color;
 
-in mat4 MVP;
+in mat4 Model;
+in mat4 View;
+in mat4 Projection;
 
 float depth(vec3 pos){
-	vec4 clip_space_pos = MVP * vec4(pos.xyz, 1.0);
+	vec4 clip_space_pos = Projection * View * Model * vec4(pos.xyz, 1.0);
 	return (clip_space_pos.z / clip_space_pos.w);
 }
 
 float get_linear_depth(vec3 pos){
-	vec4 clip_space_pos = MVP * vec4(pos.xyz, 1.0);
+	vec4 clip_space_pos = Projection * View * Model * vec4(pos.xyz, 1.0);
 	float clip_space_depth = (clip_space_pos.z/ clip_space_pos.w) * 2.0f - 1.0f;
 	float linear_depth = (2.0f * near * far) / (far + near - clip_space_depth * (far - near));
 	return linear_depth / far;

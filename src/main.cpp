@@ -21,8 +21,6 @@ int main () {
 
 	//	Plane* plane = new Plane();
 
-	Element* element = new Element();
-
 	float cube_vertices[] = {
 		-0.5f, -0.5f, -0.5f,  
 		0.5f, -0.5f, -0.5f,  
@@ -64,7 +62,6 @@ int main () {
 		-0.5f,  0.5f,  0.5f,  
 		-0.5f,  0.5f, -0.5f,  
 	};
-	element->set_vertices(cube_vertices, 36, 3);
 
 	float vertices[] = {
 		1.0f, 	1.0f, 0.0f, 
@@ -95,27 +92,31 @@ int main () {
 		wm->process_input();
 		wm->clear();
 
-		glm::mat4 projection = glm::perspective(glm::radians(wm->cam->FOV), 
+		glm::mat4 Projection = glm::perspective(glm::radians(wm->cam->FOV), 
 				wm->get_width() / wm->get_height(), near_plane, far_plane);
 
-		glm::mat4 view = glm::lookAt(wm->cam->position, wm->cam->position + wm->cam->front, 
+		glm::mat4 View = glm::lookAt(wm->cam->position, wm->cam->position + wm->cam->front, 
 				wm->cam->up);
 
-		glm::mat4 model = glm::mat4(1.0f);
-
-		glm::mat4 MVP =  projection * view *  model;
+		glm::mat4 Model = glm::mat4(1.0f);
 
 
 
 
 		common_program->bare_use();
-		common_program->set_mat4("MVP", MVP);
+		Model = glm::translate(Model, glm::vec3(0.0f, 1.0f, 0.0f));
+		common_program->set_mat4("Model", Model);
+		common_program->set_mat4("View", View);
+		common_program->set_mat4("Projection", Projection);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(cube_vertices), 
 				cube_vertices);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		plane_program->bare_use();
-		plane_program->set_mat4("MVP", MVP);
+		Model = glm::mat4(1.0f);
+		plane_program->set_mat4("Model", Model);
+		plane_program->set_mat4("View", View);
+		plane_program->set_mat4("Projection", Projection);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
