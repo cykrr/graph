@@ -14,11 +14,14 @@ Program::Program(std::string vertex, std::string fragment){
 	init_vertex_arrays();
 }
 void Program::use(){
-	glUseProgram(this->program);
+	this->bare_use();
 	glBindVertexArray(this->VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 }
 
+void Program::bare_use(){
+	glUseProgram(this->program);
+}
 void Program::set_mat4(std::string name, glm::mat4 & matrix){
 	int location = glGetUniformLocation(this->program, name.c_str());
 	glUniformMatrix4fv(location, 1, false, &matrix[0][0]);

@@ -11,6 +11,7 @@ class Program{
 		/* receives the vertex and the fragment names to be used */
 		Program(std::string, std::string);
 		void use();
+		void bare_use();
 		void set_mat4(std::string name, glm::mat4 & matrix);
 		void set_vec3(std::string name, glm::vec3 & vec);
 		void set_vec3(std::string name, glm::vec3  vec);
