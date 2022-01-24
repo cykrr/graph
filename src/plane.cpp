@@ -3,9 +3,13 @@ Plane::Plane(){
 	this->program = new Program("plane");
 	glBindVertexArray(this->program->VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, this->program->VBO);
-	glBufferData(GL_ARRAY_BUFFER, 110*sizeof(float), nullptr, GL_DYNAMIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, 200*sizeof(float), nullptr, GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3*sizeof(float)));
+	glEnableVertexAttribArray(1);
+
 }
 
 void Plane::draw(glm::mat4 *Model, glm::mat4 * View, glm::mat4 *Projection){

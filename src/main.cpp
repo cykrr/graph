@@ -18,52 +18,47 @@ int main () {
 	WindowManager* wm = new WindowManager();
 	Plane* plane = new Plane();
 
-
-
 	Program* common_program = new Program("common");
 //	Program* gui_program = new Program("gui.vs", "gui.fs");
 
 
 	float cube_vertices[] = {
-		-0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f,  0.5f, -0.5f,  
-		 0.5f,  0.5f, -0.5f,  
-		-0.5f,  0.5f, -0.5f,  
-		-0.5f, -0.5f, -0.5f,  
-		-0.5f, -0.5f,  0.5f,  
-		 0.5f, -0.5f,  0.5f,  
-		 0.5f,  0.5f,  0.5f,  
-		 0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f,  
-		-0.5f, -0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f, -0.5f,  
-		-0.5f, -0.5f, -0.5f,  
-		-0.5f, -0.5f, -0.5f,  
-		-0.5f, -0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f,  
-
-		 0.5f,  0.5f,  0.5f,  
-		 0.5f,  0.5f, -0.5f,  
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f,  0.5f,  
-		 0.5f,  0.5f,  0.5f,  
-
-		-0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f, -0.5f,  
-		 0.5f, -0.5f,  0.5f,  
-		 0.5f, -0.5f,  0.5f,  
-		-0.5f, -0.5f,  0.5f,  
-		-0.5f, -0.5f, -0.5f,  
-
-		-0.5f,  0.5f, -0.5f,  
-		 0.5f,  0.5f, -0.5f,  
-		 0.5f,  0.5f,  0.5f,  
-		 0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f,  0.5f,  
-		-0.5f,  0.5f, -0.5f,  
+		 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,          
+		  0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 
+		 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		  0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		  0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		  0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		  0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		  0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		  0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		  0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		  0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		  0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		 -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 
 	while (!glfwWindowShouldClose(wm->window)){
@@ -72,9 +67,11 @@ int main () {
 		wm->clear();
 
 		glm::mat4 Projection = glm::perspective(glm::radians(wm->cam->FOV), 
-				wm->get_width() / wm->get_height(), near_plane, far_plane);
+				wm->get_width() / wm->get_height(), 
+				near_plane, far_plane);
 
-		glm::mat4 View = glm::lookAt(wm->cam->position, wm->cam->position + wm->cam->front, 
+		glm::mat4 View = glm::lookAt(wm->cam->position, 
+				wm->cam->position + wm->cam->front, 
 				wm->cam->up);
 
 		glm::mat4 Model = glm::mat4(1.0f);

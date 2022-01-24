@@ -2,9 +2,15 @@
 out vec4 frag_color;
 uniform  vec3 in_color;
 
+in vec2 TexCoord;
+
+uniform sampler2D texture1;
+
+
+
 
 void main()
 {
-    frag_color = vec4(1.0f);
+    frag_color = texture(texture1, TexCoord);
 	gl_FragDepth = 0.8f;
 }
