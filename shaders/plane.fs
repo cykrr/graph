@@ -29,7 +29,10 @@ float get_linear_depth(vec3 pos){
 	
 }
 
-vec4 grid(vec3 frag_pos_3d, float scale){
+/* 	scale: = units(1, 2, 10...). 
+ *  size:  = percentage of size*/
+	
+vec4 grid(vec3 frag_pos_3d, float scale, float size){
 	vec2 coord = frag_pos_3d.xz * scale;
 	vec2 derivative = fwidth(coord);
 	vec2 grid = abs(fract(coord - 0.5f) - 0.5f) / derivative;
@@ -37,7 +40,7 @@ vec4 grid(vec3 frag_pos_3d, float scale){
 	float min_z = min(derivative.y, 1);
 	vec4 color;
 	float min_x = min(derivative.x, 1);
-	if (min(line, 1.0f) == 1.0f){
+	if (min(line, size) == size){
 		color = vec4(0.03f, 0.03f, 0.03f, 0.8f);
 	} else {
 		color = vec4(0.2f, 0.2f, 0.2f, 1.0f);
@@ -75,7 +78,6 @@ void main()
 
 	float fading = max(0, (0.5f - linear_depth));
 
-	frag_color = ( grid(frag_pos_3d, 1) + grid(frag_pos_3d, 10) ) *float(t>0);
+	frag_color = ( grid(frag_pos_3d, 1, 1.0f) + grid(frag_pos_3d, 10, 0.5f) ) *float(t>0);
 
 }
-/*vim: set ft=glsl*/
