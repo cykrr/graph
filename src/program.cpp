@@ -52,3 +52,8 @@ void Program::init_vertex_arrays(){
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 }
 
+void Program::set_int(std::string name, int x){
+	int location = glGetUniformLocation(this->program, name.c_str());
+	glUniform1i(location, x );
+
+}

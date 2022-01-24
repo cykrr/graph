@@ -15,6 +15,7 @@ class Program{
 		void set_mat4(std::string name, glm::mat4 & matrix);
 		void set_vec3(std::string name, glm::vec3 & vec);
 		void set_vec3(std::string name, glm::vec3  vec);
+		void set_int(std::string name, int x);
 
 		unsigned int VAO, VBO;
 
