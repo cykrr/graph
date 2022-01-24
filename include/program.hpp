@@ -9,7 +9,7 @@
 class Program{
 	public:
 		/* receives the vertex and the fragment names to be used */
-		Program(std::string, std::string);
+		Program(std::string shader_name);
 		void use();
 		void bare_use();
 		void set_mat4(std::string name, glm::mat4 & matrix);

@@ -1,8 +1,8 @@
 #include "program.hpp"
 
-Program::Program(std::string vertex, std::string fragment){
-	this->vertex = new Shader(vertex, GL_VERTEX_SHADER);
-	this->fragment = new Shader(fragment, GL_FRAGMENT_SHADER);
+Program::Program(std::string shader_name){
+	this->vertex = new Shader(shader_name, GL_VERTEX_SHADER);
+	this->fragment = new Shader(shader_name, GL_FRAGMENT_SHADER);
 	this->program = glCreateProgram();
 
 	glAttachShader(this->program, this->vertex->shader);
