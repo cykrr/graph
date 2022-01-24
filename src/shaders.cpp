@@ -2,18 +2,25 @@
 
 Shader::Shader(std::string name, unsigned int shader_type){
 	this->name = name;
+
+	std::string add = "";
+	
 	std::ifstream input;
 	std::stringstream buffer;
 	std::string source_string;
 	/* catch exception */
 	input.exceptions(std::ifstream::badbit|std::ifstream::failbit);
 	try {
-	input.open("./shaders/" + name);
-	buffer << input.rdbuf();
-	input.close();
-	source_string = buffer.str();
+		if(shader_type == GL_VERTEX_SHADER)
+			add = ".vs";
+		else if (shader_type == GL_FRAGMENT_SHADER)
+			add = ".fs";
+		input.open("./shaders/" + name + add);
+		buffer << input.rdbuf();
+		input.close();
+		source_string = buffer.str();
 	} catch (std::ifstream::failure error){
-		std::cout << name + "not found" << std::endl;
+		std::cout << name + add + " not found" << std::endl;
 		exit(3);
 	}
 
@@ -30,7 +37,7 @@ Shader::Shader(std::string name, unsigned int shader_type){
 				512, NULL, log);
 
 		std::cout << "error compiling shader "  << this->name
-			<< ".glsl:\n\n" << log;
+			<< add << "\n" << log;
 	}
 }
 
