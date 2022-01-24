@@ -108,19 +108,23 @@ int main () {
 				wm->cam->up);
 
 		glm::mat4 Model = glm::mat4(1.0f);
-
 		plane->program->use();
 
 		common_program->bare_use();
-		Model = glm::translate(Model, glm::vec3(-0.5f, 0.5f, 0.5f));
-		common_program->set_mat4("Model", Model);
 		common_program->set_mat4("View", View);
 		common_program->set_mat4("Projection", Projection);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(cube_vertices), 
 				cube_vertices);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		if(glfwGetKey(wm->window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+	for(int i=0; i < 10; i++){
+		for(int j=0; j < 10; j++){
+				Model = glm::translate(glm::mat4(1.0f), glm::vec3(i + 0.5f, 0.5f, j + 0.5f));
+				common_program->set_mat4("Model", Model);
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
+	}
+
+		if(glfwGetKey(wm->window, GLFW_KEY_P) == GLFW_PRESS)
 			plane->draw(&Model, &View, &Projection);
 
 		glfwSwapBuffers(wm->window);
