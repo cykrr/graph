@@ -16,10 +16,13 @@ const float far_plane = 100.0f;
 
 int main () {
 	WindowManager* wm = new WindowManager();
-	Program* plane_program = new Program("plane.vs", "plane.fs");
-	Program* common_program = new Program("common.vs", "common.fs");
+	Plane* plane = new Plane();
 
-	//	Plane* plane = new Plane();
+
+
+	Program* common_program = new Program("common");
+//	Program* gui_program = new Program("gui.vs", "gui.fs");
+
 
 	float cube_vertices[] = {
 		-0.5f, -0.5f, -0.5f,  
@@ -63,30 +66,6 @@ int main () {
 		-0.5f,  0.5f, -0.5f,  
 	};
 
-	float vertices[] = {
-		 1.0f, 	1.0f, 0.0f, 
-		-1.0f, -1.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-
-		-1.0f, -1.0f, 0.0f,
-		 1.0f,  1.0f, 0.0f,
-		 1.0f, -1.0f, 0.0f,
-
-
-	};
-
-	glBindVertexArray(plane_program->VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, plane_program->VBO);
-
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cube_vertices) , nullptr, GL_DYNAMIC_DRAW);
-
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof (float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-
 	while (!glfwWindowShouldClose(wm->window)){
 		wm->update_dt();
 		wm->process_input();
@@ -100,8 +79,7 @@ int main () {
 
 		glm::mat4 Model = glm::mat4(1.0f);
 
-
-
+		plane->program->use();
 
 		common_program->bare_use();
 		Model = glm::translate(Model, glm::vec3(-0.5f, 0.5f, 0.5f));
@@ -112,17 +90,7 @@ int main () {
 				cube_vertices);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		plane_program->bare_use();
-		Model = glm::mat4(1.0f);
-		plane_program->set_mat4("Model", Model);
-		plane_program->set_mat4("View", View);
-		plane_program->set_mat4("Projection", Projection);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-
-
-
+		plane->draw(&Model, &View, &Projection);
 
 		glfwSwapBuffers(wm->window);
 		glfwPollEvents();

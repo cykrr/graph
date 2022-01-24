@@ -4,7 +4,7 @@ Element::Element(){
 	this->vertices = NULL;
 	this->vertices_count = 0;
 
-	this->program = new Program("common.vs", "common.fs");
+	this->program = new Program("common");
 }
 
 void Element::set_vertices(float* vertices, int vertices_count, int dim){
