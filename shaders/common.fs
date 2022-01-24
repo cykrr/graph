@@ -12,5 +12,4 @@ uniform sampler2D texture1;
 void main()
 {
     frag_color = texture(texture1, TexCoord);
-	gl_FragDepth = 0.8f;
 }
