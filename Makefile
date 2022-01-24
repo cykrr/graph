@@ -1,7 +1,7 @@
 CXX:=g++
 INCLUDE=-Iinclude
 OBJS=glad.o camera.o window_manager.o \
-	 shaders.o program.o color.o \
+	 shaders.o program.o color.o stbi.o \
 	 plane.o element.o
 LINKS=-lm -ldl -lGL -lglfw 
 new: src/main.cpp $(OBJS) 
@@ -22,6 +22,10 @@ plane.o: src/plane.cpp
 	$(CXX) -c src/plane.cpp $(INCLUDE)
 element.o: src/element.cpp
 	$(CXX) -c src/element.cpp $(INCLUDE)
+
+stbi.o: src/stbi.cpp
+	$(CXX) -c src/stbi.cpp $(INCLUDE)
+
 windows: $(OBJS)
 	 $(CXX) src/main.cpp $(OBJS) $(INCLUDE)  -o new -g -Lmingw_links \
 		 -lglfw3 -lopengl32 -lgdi32 \
