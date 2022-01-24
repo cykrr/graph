@@ -22,12 +22,12 @@ float depth(vec3 pos){
 }
 
 float get_linear_depth(vec3 pos){
-	vec4 clip_space_pos = Projection * View * Model * vec4(pos.xyz, 1.0);
+	vec4 clip_space_pos = Projection * View * vec4(pos.xyz, 1.0);
 	float clip_space_depth = (clip_space_pos.z/ clip_space_pos.w) * 2.0f - 1.0f;
 	float linear_depth = (2.0f * near * far) / (far + near - clip_space_depth * (far - near));
 	return linear_depth / far;
-	
 }
+
 
 /* 	scale: = units(1, 2, 10...). 
  *  size:  = percentage of size*/
@@ -43,8 +43,7 @@ vec4 grid(vec3 frag_pos_3d, float scale, float size){
 	if (min(line, size) == size){
 		color = vec4(0.03f, 0.03f, 0.03f, 0.8f);
 	} else {
-		color = vec4(0.2f, 0.2f, 0.2f, 1.0f);
-
+		color = vec4(0.2f, 0.2f, 0.2f, 0.8f);
 	}
 
 	/* z axis */
@@ -72,12 +71,16 @@ void main()
 
 	vec3 frag_pos_3d = near_point + t * (far_point - near_point);
 
-	gl_FragDepth = depth(frag_pos_3d);
+	//gl_FragDepth = depth(frag_pos_3d);
+	gl_FragDepth = 0.9f;
 
 	float linear_depth = get_linear_depth(frag_pos_3d);
+
 
 	float fading = max(0, (0.5f - linear_depth));
 
 	frag_color = ( grid(frag_pos_3d, 1, 1.0f) + grid(frag_pos_3d, 10, 0.5f) ) *float(t>0);
+
+//	frag_color.a *= fading;
 
 }
