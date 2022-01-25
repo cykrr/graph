@@ -17,6 +17,30 @@ const float far_plane = 100.0f;
 #include "hud.hpp"
 #include "plane.hpp"
 
+#include <GLFW/glfw3.h>
+
+double lastTime=0, nbFrames=0;
+
+void show_fps(GLFWwindow *pWindow){
+    // Measure speed
+     double currentTime = glfwGetTime();
+     double delta = currentTime - lastTime;
+     nbFrames++;
+     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
+		 std::cout << double(nbFrames) << std::endl;
+
+         double fps = double(nbFrames) / delta;
+
+         std::stringstream ss;
+         ss << " [" << fps << " FPS]";
+
+         glfwSetWindowTitle(pWindow, ss.str().c_str());
+
+         nbFrames = 0;
+         lastTime = currentTime;
+     }
+}
+
 
 int main () {
 	WindowManager* wm = new WindowManager();
@@ -117,6 +141,7 @@ int main () {
 
 	while (!glfwWindowShouldClose(wm->window)){
 		wm->update_dt();
+		show_fps(wm->window);
 		wm->process_input();
 		wm->clear();
 
@@ -172,6 +197,7 @@ int main () {
 				wm->get_height()
 				);
 		hud->draw();
+
 
 
 
