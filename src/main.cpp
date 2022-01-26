@@ -34,8 +34,6 @@ void show_fps(GLFWwindow *pWindow){
          std::stringstream ss;
          ss << " [" << fps << " FPS]";
 
-         glfwSetWindowTitle(pWindow, ss.str().c_str());
-
          nbFrames = 0;
          lastTime = currentTime;
      }
