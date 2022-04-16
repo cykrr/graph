@@ -69,30 +69,31 @@ void WindowManager::update_dt(){
 void WindowManager::process_input()
 {
     Camera *camera = static_cast<Container *>(glfwGetWindowUserPointer(this->window))->camera;
+
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    this->cam->speed = 2.5f * this->delta_time;
+    camera->speed = 2.5f * this->delta_time;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        this->cam->position += cam->speed * cam->front;
+        camera->position += camera->speed * camera->front;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        this->cam->position -= cam->speed * cam->front;
+        camera->position -= camera->speed * camera->front;
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        this->cam->position -= glm::normalize(glm::cross(cam->front, cam->up)) * cam->speed;
+        camera->position -= glm::normalize(glm::cross(camera->front, camera->up)) * camera->speed;
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        this->cam->position += glm::normalize(glm::cross(cam->front, cam->up)) * cam->speed;
+        camera->position += glm::normalize(glm::cross(camera->front, camera->up)) * camera->speed;
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-        this->cam->position += cam->up * cam->speed;
+        camera->position += camera->up * camera->speed;
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
-        this->cam->position -= cam->up * cam->speed;
+        camera->position -= camera->up * camera->speed;
     if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
-        this->cam->FOV += 1.f;
-        printf("FOV: %.02f\n", this->cam->FOV);
+        camera->FOV += 1.f;
+        printf("FOV: %.02f\n", camera->FOV);
 
     }
     if(glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS){ 
-        this->cam->FOV -= 1.f;
-        printf("FOV: %.02f\n", this->cam->FOV);
+        camera->FOV -= 1.f;
+        printf("FOV: %.02f\n", camera->FOV);
     }
 }
 
