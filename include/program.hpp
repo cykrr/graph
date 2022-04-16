@@ -17,7 +17,6 @@ class Program{
 		void set_vec3(std::string name, glm::vec3  vec);
 		void set_int(std::string name, int x);
 
-		unsigned int VAO, VBO;
 
 	private:
 		void check_compile_errors(Shader* shader);
