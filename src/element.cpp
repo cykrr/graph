@@ -12,12 +12,11 @@ void Element::set_vertices(float* vertices, int vertices_count, int dim){
 	this->vertices_count = vertices_count;
 	this->dim = dim;
 
-	this->add_vertices_to_program();
+	this->allocateVertexData();
 }
 
-void Element::add_vertices_to_program(){
-	glBindVertexArray(this->program->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->program->VBO);
+void Element::allocateVertexData(){
+        this->bindBuffers();
 
 	glBufferData(GL_ARRAY_BUFFER,
 			this->dim * this->vertices_count * sizeof(float), 
@@ -39,4 +38,9 @@ void Element::draw(){
 
 void Element::set_mat4(std::string name, glm::mat4 & matrix){
 	this->program->set_mat4(name, matrix);
+}
+
+void Element::bindBuffers() {
+    glBindVertexArray(Vao);
+    glBindBuffer(GL_ARRAY_BUFFER, Vbo);
 }
