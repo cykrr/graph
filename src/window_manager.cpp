@@ -91,6 +91,15 @@ void WindowManager::process_input()
         this->cam->position += cam->up * cam->speed;
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         this->cam->position -= cam->up * cam->speed;
+    if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
+        this->cam->FOV += 1.f;
+        printf("FOV: %.02f\n", this->cam->FOV);
+
+    }
+    if(glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS){ 
+        this->cam->FOV -= 1.f;
+        printf("FOV: %.02f\n", this->cam->FOV);
+    }
 }
 
 float WindowManager::get_width(){
