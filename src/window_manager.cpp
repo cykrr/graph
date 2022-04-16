@@ -12,9 +12,6 @@ void WindowManager::framebuffer_callback(GLFWwindow* window, int x, int y){
 	glViewport(0, 0, x, y);
 }
 
-void WindowManager::mouse_callback(GLFWwindow* window, double pos_x, double pos_y){
-	cam->update(pos_x, pos_y);
-}
 
 void WindowManager::init_gl(){
 	glfwInit();
