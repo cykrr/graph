@@ -30,9 +30,9 @@ public:
 
 	public:
 		bool first_mouse_cam;
-		void update(double, double);
 	private:
 		void set_front();
+    void resizeCallback(double, double);
 
 };
 #endif
