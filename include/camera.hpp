@@ -7,6 +7,13 @@ class Camera {
 public:
     Camera();
 
+    // Possible camera movements to abstract keyboard
+    enum Direction {
+        Forward, // W
+        Backwards, // S
+        Left, // A
+        Right // D
+    };
 
 	float 
 		yaw, pitch,
