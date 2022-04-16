@@ -12,7 +12,7 @@ class Program{
 		Program(std::string shader_name);
 		void use();
 		void bare_use();
-		void set_mat4(std::string name, glm::mat4 & matrix);
+		void set_mat4(const std::string &name, const glm::mat4 & matrix) const;
 		void set_vec3(std::string name, glm::vec3 & vec);
 		void set_vec3(std::string name, glm::vec3  vec);
 		void set_int(std::string name, int x);

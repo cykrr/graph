@@ -19,7 +19,7 @@ void Program::use(){
 void Program::bare_use(){
 	glUseProgram(this->program);
 }
-void Program::set_mat4(std::string name, glm::mat4 & matrix){
+void Program::set_mat4(const std::string &name, const glm::mat4 & matrix) const {
 	int location = glGetUniformLocation(this->program, name.c_str());
 	glUniformMatrix4fv(location, 1, false, &matrix[0][0]);
 }
