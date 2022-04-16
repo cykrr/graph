@@ -8,23 +8,15 @@
 class Plane {
 	public: 
 		Plane();
-		Program* program;
-		void draw(glm::mat4 * Model, glm::mat4 * View, glm::mat4 * Projection);
+		static Program* program;
+		void draw(glm::mat4 * View, glm::mat4 * Projection);
+		unsigned int Vao, Vbo; // IDK 
 	private:
-		int vertices_size = 30;
-		float vertices[30] = {
-		 1.0f, 	1.0f, 0.0f, 0.0f, 0.0f,
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
- 
-		-1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
-
-
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-
-		 1.0f,  1.0f, 0.0f, 0.0f, 0.0f,
-
-		 1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-
-		};
+		static size_t vertices_size;
+		static float vertices[30];
+                void createBuffers();
+                void bindBuffers();
+                void enableAttribArray();
+                void allocateVertexData();
 };
 #endif
