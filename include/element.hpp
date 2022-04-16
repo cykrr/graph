@@ -12,12 +12,20 @@ class Element {
 	protected:
 		float* vertices;
 		int vertices_count;
-		unsigned int VAO;
-		unsigned int VBO;
+		unsigned int Vao;
+		unsigned int Vbo;
 		Program* program;
 		int dim;
 
+                /*
 		void init_vertex_arrays();
-		void add_vertices_to_program();
+		void add_vertices_to_program();  convert to the following
+                */
+
+                void createBuffers();
+                void bindBuffers();
+                void enableAttribArray();
+                void allocateVertexData();
+
 };
 #endif
