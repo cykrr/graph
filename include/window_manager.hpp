@@ -12,7 +12,6 @@ class WindowManager{
 		float delta_time, last_frame;
 	public:
 		GLFWwindow*  window;
-		Camera* cam;
 
 		WindowManager();
 		void update_dt();
