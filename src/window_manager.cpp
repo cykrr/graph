@@ -4,7 +4,6 @@ WindowManager::WindowManager(){
 	this->delta_time = 0.0f;
 	this->last_frame = 0.0f;
 
-	this->cam = new Camera();
 	init_gl();
 
 }
