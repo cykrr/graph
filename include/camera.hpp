@@ -18,14 +18,12 @@ public:
     glm::mat4 projection, view;
     glm::vec3 position, up, front, right, worldUp;
 
-		float speed, FOV;
     float 
             last_x, last_y,
             yaw = -90.f,
             pitch = 0.f,
 
-	glm::vec3 
-		position, front, up;
+            speed = 2.5f, FOV = 45.f;
 
     bool first_mouse_cam;
 
