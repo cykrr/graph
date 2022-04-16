@@ -1,6 +1,6 @@
 #version 330 core
-float far = 100.0f;
-float near = 0.01f;
+float far = 1.0f;
+float near = 0.0f;
 
 in vec3 near_point;
 in vec3 far_point;
