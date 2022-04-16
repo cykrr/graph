@@ -15,6 +15,7 @@ const float far_plane = 100.0f;
 
 #include "hud.hpp"
 #include "plane.hpp"
+#include "container.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -24,26 +25,38 @@ double lastTime=0, nbFrames=0;
 void show_fps(GLFWwindow* window);
 
 int main () {
-	WindowManager* wm = new WindowManager();
+	WindowManager wm;
+        Camera cam;
+
+
+        Container container;
+
+        container.camera = &cam;
+        container.wm = &wm;
+
+        glfwSetWindowUserPointer(wm.window, &container);
+
+
 	Plane* plane = new Plane();
 
-	while (!glfwWindowShouldClose(wm->window)){
-		wm->update_dt();
-		wm->process_input();
-		wm->clear();
+
+	while (!glfwWindowShouldClose(wm.window)){
+		wm.update_dt();
+		wm.process_input();
+		wm.clear();
 
 		glm::mat4 Projection = glm::perspective(
-				glm::radians(wm->cam->FOV), 
-				wm->get_width()/wm->get_height(), 
+				glm::radians(cam.FOV), 
+				wm.get_width()/wm.get_height(), 
 				near_plane, far_plane);
 
 		glm::mat4 View = glm::lookAt(
-				wm->cam->position, 
+				cam.position, 
 
-				wm->cam->position + 
-					wm->cam->front, 
+				cam.position + 
+				    cam.front, 
 
-				wm->cam->up);
+				cam.up);
 
 
                 plane->program->bare_use();
@@ -53,7 +66,7 @@ int main () {
 
                 plane->draw(&View, &Projection);
 	
-		glfwSwapBuffers(wm->window);
+		glfwSwapBuffers(wm.window);
 		glfwPollEvents();
 	}
 	glfwTerminate();
