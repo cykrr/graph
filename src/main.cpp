@@ -20,24 +20,8 @@ const float far_plane = 100.0f;
 
 double lastTime=0, nbFrames=0;
 
-void show_fps(GLFWwindow *pWindow){
-    // Measure speed
-     double currentTime = glfwGetTime();
-     double delta = currentTime - lastTime;
-     nbFrames++;
-     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
-		 std::cout << double(nbFrames) << std::endl;
 
-         double fps = double(nbFrames) / delta;
-
-         std::stringstream ss;
-         ss << " [" << fps << " FPS]";
-
-         nbFrames = 0;
-         lastTime = currentTime;
-     }
-}
-
+void show_fps(GLFWwindow* window);
 
 int main () {
 	WindowManager* wm = new WindowManager();
@@ -204,4 +188,22 @@ int main () {
 	}
 	glfwTerminate();
 	return 0;
+}
+
+void show_fps(GLFWwindow *pWindow){
+    // Measure speed
+     double currentTime = glfwGetTime();
+     double delta = currentTime - lastTime;
+     nbFrames++;
+     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
+		 std::cout << double(nbFrames) << std::endl;
+
+         double fps = double(nbFrames) / delta;
+
+         std::stringstream ss;
+         ss << " [" << fps << " FPS]";
+
+         nbFrames = 0;
+         lastTime = currentTime;
+     }
 }
