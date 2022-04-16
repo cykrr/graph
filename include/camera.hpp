@@ -15,6 +15,8 @@ public:
         Right // D
     };
 
+    glm::mat4 projection, view;
+    glm::vec3 position, up, front, right, worldUp;
 
 		void set_speed(float speed);
 		float speed, FOV;
