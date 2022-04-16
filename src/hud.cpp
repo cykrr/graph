@@ -4,9 +4,11 @@ Hud::Hud(WindowManager* wm){
 	this->program = new Program("hud");
 	this->Projection = glm::mat4(1.0f);
 
+        /*
 	glBindVertexArray(this->program->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, 
+	glBindBuffer(GL_ARRAY_BUFFER,  !!!!!!!! FIX
 			this->program->VBO);
+                        */
 
 	glBufferData(GL_ARRAY_BUFFER, 
 			sizeof(this->triangle), this->triangle, 
@@ -40,8 +42,7 @@ void Hud::update_matrix(float width, float height){
 	this->program->use();
 	this->Projection = glm::ortho(
 			0.0f, width,
-			0.0f, height
-			);
+			0.0f, height, 0.f, 1.f);
 	this->program->set_mat4("Projection", this->Projection);
 }
 
