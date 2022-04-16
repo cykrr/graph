@@ -1,7 +1,7 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-const float near_plane = 0.01f;
+const float near_plane = 0.1f;
 const float far_plane = 100.0f;
 
 #include "stb_image.h"
