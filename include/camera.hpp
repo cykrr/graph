@@ -15,12 +15,13 @@ public:
         Right // D
     };
 
-	float 
-		yaw, pitch,
-		last_x, last_y;
 
 		void set_speed(float speed);
 		float speed, FOV;
+    float 
+            last_x, last_y,
+            yaw = -90.f,
+            pitch = 0.f,
 
 	glm::vec3 
 		position, front, up;
