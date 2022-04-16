@@ -11,6 +11,9 @@
 class WindowManager{
 		float delta_time, last_frame;
 	public:
+		GLFWwindow*  window;
+		Camera* cam;
+
 		WindowManager();
 		void update_dt();
 		void init_gl();
@@ -22,8 +25,6 @@ class WindowManager{
 
 		float get_width(), get_height();
 		
-		GLFWwindow*  window;
-		Camera* cam;
 
 		void set_bg_color(Color color);
 		void clear();
