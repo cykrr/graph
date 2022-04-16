@@ -18,7 +18,6 @@ public:
     glm::mat4 projection, view;
     glm::vec3 position, up, front, right, worldUp;
 
-		void set_speed(float speed);
 		float speed, FOV;
     float 
             last_x, last_y,
@@ -28,11 +27,13 @@ public:
 	glm::vec3 
 		position, front, up;
 
-	public:
-		bool first_mouse_cam;
-	private:
-		void set_front();
+    bool first_mouse_cam;
+
+
+    void set_speed(float speed);
     void resizeCallback(double, double);
+    private:
+            void set_front();
 
 };
 #endif
