@@ -18,7 +18,6 @@ void Plane::draw(){
 	this->program->bare_use();
         this->bindBuffers();
 
-
 	glBufferSubData(GL_ARRAY_BUFFER, 0, 
                 sizeof(float)*this->vertices_size, vertices);
 
