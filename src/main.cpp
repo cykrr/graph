@@ -4,7 +4,6 @@ const unsigned int SCR_HEIGHT = 600;
 const float near_plane = 0.1f;
 const float far_plane = 100.0f;
 
-#include "stb_image.h"
 
 #include "camera.hpp"
 #include "window_manager.hpp"
