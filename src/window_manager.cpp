@@ -43,17 +43,14 @@ void WindowManager::init_gl(){
     }
 
 
-
-	glfwSetWindowUserPointer(this->window, this);
-
 	auto func = [](GLFWwindow* w, int x, int y){
-		static_cast<WindowManager*>(glfwGetWindowUserPointer(w))->framebuffer_callback(w, x, y);
+		static_cast<Container *>(glfwGetWindowUserPointer(w))->wm->framebuffer_callback(w, x, y);
 	};
 
 	glfwSetFramebufferSizeCallback(this->window, func);
 
 	auto mouse_func = [](GLFWwindow* w, double pos_x, double pos_y){
-		static_cast<WindowManager*>(glfwGetWindowUserPointer(w))->mouse_callback(w, pos_x, pos_y);
+		static_cast<Container*>(glfwGetWindowUserPointer(w))->camera->resizeCallback(pos_x, pos_y);
 	};
 
 	glfwSetCursorPosCallback(this->window, mouse_func);
@@ -71,6 +68,7 @@ void WindowManager::update_dt(){
 
 void WindowManager::process_input()
 {
+    Camera *camera = static_cast<Container *>(glfwGetWindowUserPointer(this->window))->camera;
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
