@@ -20,7 +20,7 @@ Camera::Camera(){
 
 }
 
-void Camera::update(double pos_x, double pos_y){
+void Camera::resizeCallback(double pos_x, double pos_y){
 	if(this->first_mouse_cam){
 		this->last_x = pos_x;
 		this->last_y = pos_y;
