@@ -9,7 +9,7 @@ class Plane {
 	public: 
 		Plane();
 		static Program* program;
-		void draw(glm::mat4 * View, glm::mat4 * Projection);
+		void draw();
 		unsigned int Vao, Vbo; // IDK 
 	private:
 		static size_t vertices_size;

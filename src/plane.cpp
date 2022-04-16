@@ -14,12 +14,10 @@ Plane::Plane(){
 // send matrices
 // send buffer data
 // draw
-void Plane::draw(glm::mat4 * View, glm::mat4 *Projection){
+void Plane::draw(){
 	this->program->bare_use();
         this->bindBuffers();
 
-	this->program->set_mat4("View", *View);
-	this->program->set_mat4("Projection", *Projection);
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0, 
                 sizeof(float)*this->vertices_size, vertices);

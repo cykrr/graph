@@ -64,7 +64,7 @@ int main () {
 		plane->program->set_mat4("Projection", 
 				Projection);
 
-                plane->draw(&View, &Projection);
+                plane->draw();
 	
 		glfwSwapBuffers(wm.window);
 		glfwPollEvents();
