@@ -3,8 +3,12 @@
 // bind plane VAO
 // enable attribute pointers
 Plane::Plane(){
-        if(!this->program)
+        if(!this->program) {
             this->program = new Program("plane");
+            this->program->use();
+            this->program->set_mat4("View", glm::mat4(1.f));
+            this->program->set_mat4("Projection", glm::mat4(1.f));
+        }
         this->createBuffers();
         this->enableAttribArray();
         this->allocateVertexData();
