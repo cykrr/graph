@@ -4,14 +4,14 @@
 #include <glm/glm.hpp>
 #include <iostream>
 class Camera { 
+public:
+    Camera();
 
 
 	float 
 		yaw, pitch,
 		last_x, last_y;
 
-	public:
-		Camera();
 		void set_speed(float speed);
 		float speed, FOV;
 
