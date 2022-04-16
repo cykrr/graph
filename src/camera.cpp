@@ -11,8 +11,8 @@ Camera::Camera(){
 
 	this->set_front();
 
-	this->last_x = 800/2;
-	this->last_y = 600/2;
+	this->last_x = (float)800/2;
+	this->last_y = (float)600/2;
 
 	this->FOV = 45.0f;
 
