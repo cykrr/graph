@@ -11,12 +11,9 @@ Program::Program(std::string shader_name){
 	check_compile_errors(this->vertex);
 	check_compile_errors(this->fragment);
 
-	init_vertex_arrays();
 }
 void Program::use(){
 	this->bare_use();
-	glBindVertexArray(this->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 }
 
 void Program::bare_use(){
@@ -44,13 +41,6 @@ void Program::set_vec3(std::string name, glm::vec3 vec){
 
 }
 
-void Program::init_vertex_arrays(){
-	glGenVertexArrays(1, &(this->VAO) );
-	glGenBuffers(1, &(this->VBO));
-
-	glBindVertexArray(this->VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-}
 
 void Program::set_int(std::string name, int x){
 	int location = glGetUniformLocation(this->program, name.c_str());
