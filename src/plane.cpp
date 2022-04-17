@@ -9,6 +9,7 @@ Plane::Plane(){
             this->program->set_mat4("View", glm::mat4(1.f));
             this->program->set_mat4("Projection", glm::mat4(1.f));
         }
+
         this->createBuffers();
         this->enableAttribArray();
         this->allocateVertexData();
