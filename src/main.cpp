@@ -64,10 +64,11 @@ int main () {
         wm.process_input();
 
         glClear(
+                
                 GL_COLOR_BUFFER_BIT |
                 GL_DEPTH_BUFFER_BIT);
 
-        plane->program->bare_use();
+        plane->program->use();
         plane->program->set_mat4("View", View);
 
         plane->draw();
@@ -93,4 +94,6 @@ void onFramebufferResize(GLFWwindow *window, int x, int y) {
         program->set_mat4("Projection", camera->projection);
     }
 
+    WindowManager::width = x;
+    WindowManager::height = y;
 }

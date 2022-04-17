@@ -12,6 +12,7 @@ class WindowManager{
 		float delta_time, last_frame;
 	public:
 		GLFWwindow*  window;
+                static int width, height;
 
 		WindowManager();
 		void init_gl();

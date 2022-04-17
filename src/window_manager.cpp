@@ -2,6 +2,9 @@
 #include "container.hpp"
 #include "util.hpp"
 
+int WindowManager::width = 0;
+int WindowManager::height = 0;
+
 WindowManager::WindowManager(){
 	this->delta_time = 0.0f;
 	this->last_frame = 0.0f;
