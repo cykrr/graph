@@ -1,6 +1,3 @@
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-
 const float near_plane = 0.1f;
 const float far_plane = 100.0f;
 
@@ -17,76 +14,52 @@ const float far_plane = 100.0f;
 #include "plane.hpp"
 #include "container.hpp"
 
+#include "util.hpp"
+
 #include <GLFW/glfw3.h>
 
-double lastTime=0, nbFrames=0;
 
 
 void show_fps(GLFWwindow* window);
 
 int main () {
-	WindowManager wm;
-        Camera cam;
+    Container container;
+    WindowManager wm;
+    Camera cam;
+
+    container.camera = &cam;
+    container.wm = &wm;
+
+    glfwSetWindowUserPointer(wm.window, &container);
 
 
-        Container container;
-
-        container.camera = &cam;
-        container.wm = &wm;
-
-        glfwSetWindowUserPointer(wm.window, &container);
+    Plane* plane = new Plane();
+    container.programs.push_back(plane->program);
 
 
-	Plane* plane = new Plane();
+    while (!glfwWindowShouldClose(wm.window)){
+        Time::update();
+        wm.process_input();
+        wm.clear();
+
+        glm::mat4 View = glm::lookAt(
+                cam.position, 
+
+                cam.position + 
+                cam.front, 
+
+                cam.up);
 
 
-	while (!glfwWindowShouldClose(wm.window)){
-		wm.update_dt();
-		wm.process_input();
-		wm.clear();
+        plane->program->bare_use();
+        plane->program->set_mat4("View", View);
 
-		glm::mat4 Projection = glm::perspective(
-				glm::radians(cam.FOV), 
-				wm.get_width()/wm.get_height(), 
-				near_plane, far_plane);
+        plane->draw();
 
-		glm::mat4 View = glm::lookAt(
-				cam.position, 
-
-				cam.position + 
-				    cam.front, 
-
-				cam.up);
-
-
-                plane->program->bare_use();
-		plane->program->set_mat4("View", View);
-		plane->program->set_mat4("Projection", 
-				Projection);
-
-                plane->draw();
-	
-		glfwSwapBuffers(wm.window);
-		glfwPollEvents();
-	}
-	glfwTerminate();
-	return 0;
+        glfwSwapBuffers(wm.window);
+        glfwPollEvents();
+    }
+    glfwTerminate();
+    return 0;
 }
 
-void show_fps(GLFWwindow *pWindow){
-    // Measure speed
-     double currentTime = glfwGetTime();
-     double delta = currentTime - lastTime;
-     nbFrames++;
-     if ( delta >= 1.0 ){ // If last cout was more than 1 sec ago
-		 std::cout << double(nbFrames) << std::endl;
-
-         double fps = double(nbFrames) / delta;
-
-         std::stringstream ss;
-         ss << " [" << fps << " FPS]";
-
-         nbFrames = 0;
-         lastTime = currentTime;
-     }
-}
