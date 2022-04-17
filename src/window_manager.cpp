@@ -58,18 +58,6 @@ void WindowManager::init_gl(){
     }
 
 
-	auto func = [](GLFWwindow* w, int x, int y){
-		static_cast<Container *>(glfwGetWindowUserPointer(w))->wm->framebuffer_callback(w, x, y);
-	};
-
-	glfwSetFramebufferSizeCallback(this->window, func);
-
-	auto mouse_func = [](GLFWwindow* w, double pos_x, double pos_y){
-		static_cast<Container*>(glfwGetWindowUserPointer(w))->camera->resizeCallback(pos_x, pos_y);
-	};
-
-	glfwSetCursorPosCallback(this->window, mouse_func);
-	glfwSetInputMode(this->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glEnable(GL_DEPTH_TEST);
 

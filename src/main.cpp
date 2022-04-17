@@ -30,6 +30,20 @@ int main () {
     container.camera = &cam;
     container.wm = &wm;
 
+	auto func = [](GLFWwindow* w, int x, int y){
+		static_cast<Container *>(glfwGetWindowUserPointer(w))->wm->framebuffer_callback(w, x, y);
+	};
+
+	glfwSetFramebufferSizeCallback(wm.window, func);
+
+	auto mouse_func = [](GLFWwindow* w, double pos_x, double pos_y){
+		static_cast<Container*>(glfwGetWindowUserPointer(w))->camera->update(pos_x, pos_y);
+	};
+
+	glfwSetCursorPosCallback(wm.window, mouse_func);
+
+	glfwSetInputMode(wm.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
     glfwSetWindowUserPointer(wm.window, &container);
 
 
