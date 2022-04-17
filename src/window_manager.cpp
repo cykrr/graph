@@ -1,5 +1,6 @@
 #include "window_manager.hpp"
 #include "container.hpp"
+#include "util.hpp"
 
 WindowManager::WindowManager(){
 	this->delta_time = 0.0f;
@@ -10,6 +11,19 @@ WindowManager::WindowManager(){
 }
 
 void WindowManager::framebuffer_callback(GLFWwindow* window, int x, int y){
+        Container *container = 
+            static_cast<Container *>(glfwGetWindowUserPointer(window));
+        container->camera->resizeCallback(x, y);
+
+
+        for(Program *program: container->programs){
+            printf("Sent matrix\n");
+            program->use();
+            program->set_mat4("Projection", 
+                    container->camera->projection);
+        }
+
+
 	glViewport(0, 0, x, y);
 }
 
@@ -61,12 +75,6 @@ void WindowManager::init_gl(){
 
 }
 
-void WindowManager::update_dt(){
-	float current_frame = glfwGetTime();
-	this->delta_time = current_frame - this->last_frame;
-	this->last_frame = current_frame;
-}
-
 void WindowManager::process_input()
 {
     Camera *camera = static_cast<Container *>(glfwGetWindowUserPointer(this->window))->camera;
@@ -74,7 +82,7 @@ void WindowManager::process_input()
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    camera->speed = 2.5f * this->delta_time;
+    camera->speed = 2.5f * Time::dt;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera->position += camera->speed * camera->front;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
