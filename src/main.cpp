@@ -35,7 +35,8 @@ int main () {
     glfwSetFramebufferSizeCallback(wm.window, onFramebufferResize);
 
     auto mouse_func = [](GLFWwindow* w, double pos_x, double pos_y){
-        static_cast<Container*>(glfwGetWindowUserPointer(w))->camera->update(pos_x, pos_y);
+        static_cast<Container*>(glfwGetWindowUserPointer(w))->
+            camera->update(pos_x, pos_y);
     };
 
     glfwSetCursorPosCallback(wm.window, mouse_func);
@@ -46,7 +47,7 @@ int main () {
 
 
     Plane* plane = new Plane();
-    container.programs.push_back(plane->program);
+    container.programs.push_back(plane->program); // Update camera's projection on callback
 
 
     glClearColor(0.2f, 0.2f, 0.f, 1.f);
