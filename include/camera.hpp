@@ -30,6 +30,7 @@ public:
 
     void set_speed(float speed);
     void resizeCallback(double, double);
+    void update(double, double);
     private:
             void set_front();
 

@@ -1,4 +1,5 @@
 #include "camera.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 Camera::Camera(){
 
@@ -20,7 +21,15 @@ Camera::Camera(){
 
 }
 
-void Camera::resizeCallback(double pos_x, double pos_y){
+void Camera::resizeCallback(double x, double y) {
+    this->projection = glm::perspective(
+            glm::radians(this->FOV),
+            static_cast<float>(x/y),
+            0.1f, 100.f
+            );
+}
+
+void Camera::update(double pos_x, double pos_y){
 	if(this->first_mouse_cam){
 		this->last_x = pos_x;
 		this->last_y = pos_y;
