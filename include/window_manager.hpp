@@ -14,7 +14,6 @@ class WindowManager{
 		GLFWwindow*  window;
 
 		WindowManager();
-		void update_dt();
 		void init_gl();
 
 		void framebuffer_callback(GLFWwindow* window, int x, int y );
