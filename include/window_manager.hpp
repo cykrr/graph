@@ -16,7 +16,6 @@ class WindowManager{
 		WindowManager();
 		void init_gl();
 
-		void framebuffer_callback(GLFWwindow* window, int x, int y );
 		void mouse_callback(GLFWwindow* window, double pos_x, double pos_y);
 
 		void process_input();

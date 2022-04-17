@@ -10,24 +10,6 @@ WindowManager::WindowManager(){
 
 }
 
-void WindowManager::framebuffer_callback(GLFWwindow* window, int x, int y){
-        Container *container = 
-            static_cast<Container *>(glfwGetWindowUserPointer(window));
-        container->camera->resizeCallback(x, y);
-
-
-        for(Program *program: container->programs){
-            printf("Sent matrix\n");
-            program->use();
-            program->set_mat4("Projection", 
-                    container->camera->projection);
-        }
-
-
-	glViewport(0, 0, x, y);
-}
-
-
 void WindowManager::init_gl(){
 	glfwInit();
 
