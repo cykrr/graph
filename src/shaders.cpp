@@ -1,4 +1,5 @@
 #include "shaders.hpp"
+#include "glad/glad.h"
 
 Shader::Shader(std::string name, unsigned int shader_type){
 	this->name = name;

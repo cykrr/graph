@@ -1,3 +1,4 @@
+#include "glad/glad.h"
 #include "hud.hpp"
 /* as vao and vbo are not really part of Program() they should be instanciated as a class of its own?? */
 Hud::Hud(WindowManager* wm){

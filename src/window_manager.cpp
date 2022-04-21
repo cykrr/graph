@@ -1,3 +1,4 @@
+#include "glad/glad.h"
 #include "window_manager.hpp"
 #include "container.hpp"
 #include "util.hpp"

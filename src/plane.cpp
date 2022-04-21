@@ -1,3 +1,4 @@
+#include "glad/glad.h"
 #include "plane.hpp"
 // init program
 // bind plane VAO

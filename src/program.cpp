@@ -1,3 +1,4 @@
+#include "glad/glad.h"
 #include "program.hpp"
 
 Program::Program(std::string shader_name){
