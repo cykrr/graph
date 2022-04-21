@@ -17,7 +17,7 @@ in mat4 View;
 in mat4 Projection;
 
 float depth(vec3 pos){
-	vec4 clip_space_pos = Projection * View * Model * vec4(pos.xyz, 1.0);
+	vec4 clip_space_pos = Projection * View * vec4(pos.xyz, 1.0);
 	return (clip_space_pos.z / clip_space_pos.w);
 }
 
@@ -47,16 +47,16 @@ vec4 grid(vec3 frag_pos_3d, float scale, float size){
 	}
 
 	/* z axis */
-	if ( frag_pos_3d.x > -0.1f * min_x && 
-			frag_pos_3d.x  < 0.1f * min_x ){
+	if ( frag_pos_3d.x > -0.2f * min_x && 
+			frag_pos_3d.x  < 0.2f * min_x ){
 		color.x = 0.0f;
 		color.y = 0.0f;
 		color.z = 1.0f;
 	}
 
 	/* x axis */
-	if ( frag_pos_3d.z > -0.1f * min_z && 
-			frag_pos_3d.z  < 0.1f * min_z ){
+	if ( frag_pos_3d.z > -0.2f * min_z && 
+			frag_pos_3d.z  < 0.2f * min_z ){
 		color.x = 1.0f;
 		color.y = 0.0f;
 		color.z = 0.0f;
