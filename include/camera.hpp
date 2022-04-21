@@ -1,10 +1,10 @@
-#ifndef CAMERA_H
-#	define CAMERA_H
-#include <glm/vec3.hpp>
-#include <glm/glm.hpp>
-#include <iostream>
-class Camera { 
-public:
+#ifndef CAM_H
+#define CAM_H
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "util.hpp"
+class Camera {
+    public:
     Camera();
 
     // Possible camera movements to abstract keyboard
@@ -15,24 +15,26 @@ public:
         Right // D
     };
 
-    glm::mat4 projection, view;
-    glm::vec3 position, up, front, right, worldUp;
+    glm::mat4 
+        projection, view;
 
-    float 
-            last_x, last_y,
-            yaw = -90.f,
-            pitch = 0.f,
+    glm::vec3
+        position, up, front, right, worldUp;
 
-            speed = 2.5f, FOV = 45.f;
+    float yaw = -90.0f, pitch = 0.f;
 
-    bool first_mouse_cam;
+    float speed = 2.5f, sensitivity = 0.1f, zoom = 45.0f;
 
+    bool firstTime;
+    float lastX, lastY;
 
-    void set_speed(float speed);
-    void resizeCallback(double, double);
-    void update(double, double);
-    private:
-            void set_front();
+    void resizeCallback(int width, int height);
 
+    void look(void);
+    void updateVectors(void);
+
+    void processInput(Direction dir);
+    void mouse(double x, double y);
 };
+
 #endif

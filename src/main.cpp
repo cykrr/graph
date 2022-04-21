@@ -36,7 +36,8 @@ int main () {
 
     auto mouse_func = [](GLFWwindow* w, double pos_x, double pos_y){
         static_cast<Container*>(glfwGetWindowUserPointer(w))->
-            camera->update(pos_x, pos_y);
+            camera->mouse(pos_x, pos_y);
+        
     };
 
     glfwSetCursorPosCallback(wm.window, mouse_func);
@@ -54,13 +55,7 @@ int main () {
     while (!glfwWindowShouldClose(wm.window)){
         Time::update();
 
-        glm::mat4 View = glm::lookAt(
-                cam.position, 
-
-                cam.position + 
-                cam.front, 
-
-                cam.up);
+        cam.look();
 
         wm.process_input();
 
@@ -70,7 +65,7 @@ int main () {
                 GL_DEPTH_BUFFER_BIT);
 
         plane->program->use();
-        plane->program->set_mat4("View", View);
+        plane->program->set_mat4("View", cam.view);
 
         plane->draw();
 
