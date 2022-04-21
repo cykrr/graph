@@ -1,6 +1,5 @@
 #ifndef PLANE_H
 #define PLANE_H
-#include "glad/glad.h"
 #include "shaders.hpp"
 #include "program.hpp"
 
