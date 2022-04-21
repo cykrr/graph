@@ -1,4 +1,5 @@
 #include "util.hpp"
+#include "GLFW/glfw3.h"
 namespace Time {
     float dt = 0;
     double now = 0;
