@@ -69,13 +69,13 @@ void WindowManager::process_input()
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
         camera->position -= camera->up * camera->speed;
     if(glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) {
-        camera->FOV += 1.f;
-        printf("FOV: %.02f\n", camera->FOV);
+        camera->zoom += 1.f;
+        printf("zoom: %.02f\n", camera->zoom);
 
     }
     if(glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS){ 
-        camera->FOV -= 1.f;
-        printf("FOV: %.02f\n", camera->FOV);
+        camera->zoom -= 1.f;
+        printf("zoom: %.02f\n", camera->zoom);
     }
 }
 

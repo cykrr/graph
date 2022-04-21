@@ -1,6 +1,5 @@
 #ifndef WM_H
 #define WM_H
-#include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "camera.hpp"
