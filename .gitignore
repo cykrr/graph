@@ -4,3 +4,4 @@ a.out
 .ccls-cache/
 compile_commands.json
 new.exe
+.cache/clangd/index
